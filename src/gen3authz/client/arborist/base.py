@@ -525,7 +525,7 @@ class BaseArboristClient(AuthzClient):
     @maybe_sync
     async def delete_resource(self, path):
         url = self._resource_url + quote(path)
-        response = await self.delete(url)
+        response = await self.delete(url, expect_json=False)
         if response.code not in [204, 404]:
             msg = "could not delete resource `{}` in arborist: {}".format(
                 path, response.error_msg
